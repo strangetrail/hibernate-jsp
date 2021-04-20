@@ -41,8 +41,8 @@ public class TableGenerator {
 			sbContent.append(listItem(i));
 		}
 		sbContent.append(listItem(currentIndex));
-		if (totalPages - currentIndex > minimumLeftRightItems+maximumLeadingTrailingItems) {
-			rightSide = currentIndex+maximumLeadingTrailingItems;
+		if (totalPages - currentIndex > minimumLeftRightItems+maximumLeadingTrailingItems+1) {
+			rightSide = currentIndex+maximumLeadingTrailingItems+1;
 		}
 		else {
 			rightSide = totalPages;

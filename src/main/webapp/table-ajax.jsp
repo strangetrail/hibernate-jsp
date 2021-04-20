@@ -19,7 +19,7 @@
 		out.print(generatedTable);
 	%>
 	</div>
-	<div class="listindex"><input type="text" id="listindex"/></div>
+	<div class="listindex"><input type="text" style="width: 40px" id="listindex"/></div>
 	<script>
          document.getElementById("listindex").addEventListener("keydown",
 		   function(event) {
