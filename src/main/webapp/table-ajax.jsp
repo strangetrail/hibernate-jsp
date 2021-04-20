@@ -12,12 +12,25 @@
 <script src="app-ajax.js" type="text/javascript"></script>
 </head>
 <body>
-	<div name="ajaxTable" id="ajaxTable">
+	<div name="ajaxTable" class="listindex" id="ajaxTable">
 	<%
 		TableGenerator tg = new TableGenerator();
 		String generatedTable = tg.generateGeneral(0, 5, 100, 0);
 		out.print(generatedTable);
 	%>
 	</div>
+	<div class="listindex"><input type="text" id="listindex"/></div>
+	<script>
+         document.getElementById("listindex").addEventListener("keydown",
+		   function(event) {
+		      if (!event) {
+		         var event = window.event;
+		      }
+		         //event.preventDefault();
+		      if (event.keyCode == 13){
+		         showpage(document.getElementById("listindex").value);
+		      }
+		   }, false);
+	</script>
 </body>
 </html>

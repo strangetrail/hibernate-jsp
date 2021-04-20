@@ -3,12 +3,12 @@ package generate.table;
 public class TableGenerator {
 	public static final Integer numberOfRows = 5;
 	public static final Integer minimumLeftRightItems = 3;
-	public static final Integer maximumLeadingTrailingItems = 5;
+	public static final Integer maximumLeadingTrailingItems = 3;
 
 	private String listItem(Integer ind) {
 		StringBuilder sbItem = new StringBuilder();
 		sbItem.append("<li class=\"inliner\">");
-		sbItem.append("<input type=\"button\" onclick=\"showpage('" + ind + "')\" value=\"" + ind + "\"/>");
+		sbItem.append("<input type=\"button\" class=\"scrollbutton\" onclick=\"showpage('" + ind + "')\" value=\"" + ind + "\"/>");
 		sbItem.append("</li>");
 		return sbItem.toString();
 	}
@@ -27,7 +27,7 @@ public class TableGenerator {
 			sbContent.append("</tr>");
 		}
 		sbContent.append("</table>");
-		sbContent.append("<ul>");
+		sbContent.append("<ul class=\"inlinelist\">");
 		if (currentIndex > minimumLeftRightItems+maximumLeadingTrailingItems) {
 			leftSide = currentIndex - maximumLeadingTrailingItems;
 			for (i=0; i<minimumLeftRightItems; i++) {

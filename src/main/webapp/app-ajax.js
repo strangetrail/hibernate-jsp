@@ -13,4 +13,5 @@ function showpage (val) {
 			$('#ajaxTable').html(responseText);
 		}
 	});
+	document.getElementById('listindex').value = val;
 }

@@ -17,11 +17,22 @@ public class AjaxTableServlet extends HttpServlet {
 		if(pageNumber == null || "".equals(pageNumber)){
 			pageNumber = "0";
 		}
-		Integer iPageNumber = Integer.parseInt(pageNumber);
-		TableGenerator tg = new TableGenerator();
-		String tableHTML = tg.generateGeneral(iPageNumber*TableGenerator.numberOfRows, TableGenerator.numberOfRows, 100, iPageNumber);
-		
-		response.setContentType("text/html");
-		response.getWriter().write(tableHTML);
+		try {
+			Integer iPageNumber = Integer.parseInt(pageNumber);
+			TableGenerator tg = new TableGenerator();
+			String tableHTML = tg.generateGeneral(iPageNumber*TableGenerator.numberOfRows, TableGenerator.numberOfRows, 100, iPageNumber);
+			
+			response.setContentType("text/html");
+			response.getWriter().write(tableHTML);
+		}
+		catch (NumberFormatException e) {
+			TableGenerator tg = new TableGenerator();
+			String tableHTML = tg.generateGeneral(0, TableGenerator.numberOfRows, 100, 0);
+			
+			response.setContentType("text/html");
+			response.getWriter().write(tableHTML);
+
+			e.printStackTrace();
+		}
 	}
 }
