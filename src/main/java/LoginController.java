@@ -39,9 +39,18 @@ public class LoginController extends HttpServlet {
 	private void logging_in(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
 		Boolean dispatchedSuccess = false;
+		Boolean alreadyLoggedIn = false;
 		String login = request.getParameter("login_field");
 		String password = request.getParameter("password_field");
 		String hashtext;
+		Cookie []c = request.getCookies();
+		for (Cookie item : c) {
+			if (item.getName().compareTo("session_id") == 0) {
+				alreadyLoggedIn = true;
+				break;
+			}
+		}
+		if (!alreadyLoggedIn) {
 		try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             byte[] messageDigest = md.digest(password.getBytes());
@@ -76,6 +85,11 @@ public class LoginController extends HttpServlet {
 		}
 		if (!dispatchedSuccess) {
         	RequestDispatcher dispatcher = request.getRequestDispatcher("login-failure.jsp");
+            dispatcher.forward(request, response);
+		}
+		}
+		else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("already-logged-in.jsp");
             dispatcher.forward(request, response);
 		}
 	}

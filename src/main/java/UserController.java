@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,15 @@ public class UserController extends HttpServlet {
 
     private void register(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     	String hashtext;
+		Boolean alreadyLoggedIn = false;
+    	Cookie []c = request.getCookies();
+		for (Cookie item : c) {
+			if (item.getName().compareTo("session_id") == 0) {
+				alreadyLoggedIn = true;
+				break;
+			}
+		}
+		if (!alreadyLoggedIn) {
     	String firstName = request.getParameter("first_name");
         String lastName = request.getParameter("last_name");
         String username = request.getParameter("login_field");
@@ -66,5 +76,10 @@ public class UserController extends HttpServlet {
 	        RequestDispatcher dispatcher = request.getRequestDispatcher("register-success.jsp");
 	        dispatcher.forward(request, response);
         }
+		}
+		else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("already-logged-in.jsp");
+	        dispatcher.forward(request, response);
+		}
     }
 }
