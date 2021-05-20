@@ -24,3 +24,28 @@ div.loginbar {
 .listindex {
 	text-align: center;
 }
+.chatbox {
+	background-color: #c44a0e3d;
+	display: flex;
+	position: fixed;
+	right: 5px;
+	flex-wrap: nowrap;
+	bottom: 50px;
+	width: 300px;
+	height: 200px;
+	overflow-y:auto;
+	overflow-x:auto;
+	flex-direction: column;
+}
+.answer {
+    background-color: #c44a0e3d;
+    position: relative;
+    right:10px;
+    text-align: right;
+}
+.question {
+    background-color: #c44a0e3d;
+    left: 10px;
+    position: relative;
+    width: 270px;
+}
