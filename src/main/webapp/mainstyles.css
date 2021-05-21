@@ -27,15 +27,30 @@ div.loginbar {
 .chatbox {
 	background-color: #c44a0e3d;
 	display: flex;
-	position: fixed;
-	right: 5px;
 	flex-wrap: nowrap;
-	bottom: 50px;
 	width: 300px;
 	height: 200px;
 	overflow-y:auto;
 	overflow-x:auto;
 	flex-direction: column;
+}
+.chatcontainer {
+	position: fixed;
+	right: 5px;
+	bottom: 50px;
+	width: 300px;
+	height: 250px;
+	overflow-y:auto;
+	overflow-x:auto;
+}
+.textinput{
+	position:relative;
+	display:inline;
+	width:150px;
+}
+.submitchatbutton{
+	position:relative;
+	display:inline;
 }
 .answer {
     background-color: #c44a0e3d;

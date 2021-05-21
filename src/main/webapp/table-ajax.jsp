@@ -32,7 +32,8 @@
 		      }
 		   }, false);
 	</script>
-	<div class="chatbox">
+	<div class=chatcontainer>
+	<div id="chatbox" class="chatbox">
 		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
 			text
 		</div>
@@ -104,6 +105,9 @@
 			text
 		</div>
 		
+	</div>
+	<input type="text" class="textinput"/>
+	<input type="button" class="submitchatbutton" value="send" onclick="send_test()"/>
 	</div>
 </body>
 </html>
