@@ -39,9 +39,22 @@ div.loginbar {
 	right: 5px;
 	bottom: 50px;
 	width: 300px;
-	height: 250px;
+	height: 300px;
 	overflow-y:auto;
 	overflow-x:auto;
+}
+.chatselection {
+	cursor:pointer;
+	position:relative;
+	display:inline-block;
+	height:20px;
+	background-color:#c44a0e3d;
+	padding:0px;
+}
+.userlist {
+	display: none;
+	position: fixed;
+	width: 10px;
 }
 .textinput{
 	position:relative;

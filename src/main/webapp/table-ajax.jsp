@@ -1,3 +1,4 @@
+<%@page import="generate.userlist.GenerateUserList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "generate.table.TableGenerator" %>
@@ -33,78 +34,13 @@
 		   }, false);
 	</script>
 	<div class=chatcontainer>
+	<a role="button" class="chatselection" onclick="showuserlist()">V</a>
+	<%
+		GenerateUserList ulGenerator = new GenerateUserList();
+		out.print(ulGenerator.generateList());
+	%>
 	<div id="chatbox" class="chatbox">
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<br/>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div class="answer">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div class="question">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		<div style="background-color: #c44a0e3d; width: 40px; height: 60px">
-			text
-		</div>
-		
+				
 	</div>
 	<input type="text" class="textinput"/>
 	<input type="button" class="submitchatbutton" value="send" onclick="send_test()"/>

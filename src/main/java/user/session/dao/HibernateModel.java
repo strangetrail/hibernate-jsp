@@ -39,6 +39,7 @@ public class HibernateModel {
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(User.class);
                 configuration.addAnnotatedClass(UserSession.class);
+                configuration.addAnnotatedClass(ChatMessage.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();

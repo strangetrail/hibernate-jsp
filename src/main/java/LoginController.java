@@ -71,6 +71,9 @@ public class LoginController extends HttpServlet {
 			    Cookie cookieSessionId = new Cookie("session_id", genStr.toString(16));
 			    cookieSessionId.setMaxAge(60*60);
 			    response.addCookie(cookieSessionId);
+			    Cookie cookieLogin = new Cookie("login", login);
+			    cookieSessionId.setMaxAge(60*60);
+			    response.addCookie(cookieLogin);
 			    UserSession usCookie = new UserSession();
 			    usCookie.setSessionId(genStr.toString(16));
 			    usCookie.setUserName(login);
