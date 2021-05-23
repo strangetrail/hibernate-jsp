@@ -10,6 +10,27 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class ChatMessageDAO {
+	
+	public void addChatMessage (int user_1, int user_2, String message) {
+		Transaction tr = null;
+		try(Session session = HibernateModel.getSessionFactory().openSession()) {
+        	tr = session.beginTransaction();
+        	ChatMessage chatMessage = new ChatMessage();
+        	chatMessage.setUser1(user_1);
+        	chatMessage.setUser2(user_2);
+        	chatMessage.setMessage(message);
+        	session.save(chatMessage);
+        	tr.commit();
+		} catch (Exception e) {
+        	e.printStackTrace();
+        	if (tr != null) {
+        		tr.rollback();
+        	}
+        	
+        }
+		
+	}
+	
 	public List<ChatMessage> listChatMessages(int user_1, int user_2){
 		Transaction transaction = null;
         try(Session session = HibernateModel.getSessionFactory().openSession()) {

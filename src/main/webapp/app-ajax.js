@@ -73,12 +73,24 @@ var x = document.getElementById("userlist");
 function selectchat(login) {
 	var currentLogin = getCookie("login");
 	listchats(currentLogin, login);
+	
 }
 
 function send_test () {
+	var message = document.getElementById('chatinput').value;
 	var newcontent = document.createElement('div');
 	newcontent.classList.add('question');
-	newcontent.innerHTML = 'question';
+	newcontent.innerHTML = message;
 	var chatbox = document.getElementById('chatbox');
 	chatbox.appendChild(newcontent);
+	$.ajax({
+		url : 'getchat',
+		data : {
+			action: 'add',
+			message: message
+		},
+		success : function(responseText) {
+			
+		}
+	});
 }

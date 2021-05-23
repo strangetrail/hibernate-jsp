@@ -42,7 +42,7 @@
 	<div id="chatbox" class="chatbox">
 				
 	</div>
-	<input type="text" class="textinput"/>
+	<input type="text" class="textinput" id="chatinput"/>
 	<input type="button" class="submitchatbutton" value="send" onclick="send_test()"/>
 	</div>
 </body>

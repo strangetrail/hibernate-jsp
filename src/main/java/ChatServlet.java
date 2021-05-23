@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 
 import user.session.dao.*;
 
@@ -39,8 +40,33 @@ public class ChatServlet extends HttpServlet {
 			}
 			JSONChat = JSONChat.substring(0, JSONChat.length() - 1);
 			JSONChat += "]}";
+			Cookie cookieRecipient = new Cookie("recipient", user_2);
+		    cookieRecipient.setMaxAge(60*60);
+		    response.addCookie(cookieRecipient);
 			response.setContentType("text/json");
 			response.getWriter().write(JSONChat);
+		}
+		if (request.getParameter("action").compareTo("add") == 0) {
+			Cookie []c = request.getCookies();
+			String login="", recipient="";
+			if (c != null) {
+				for (Cookie c_item : c) {
+					if (c_item.getName().compareTo("login") == 0) {
+						login = c_item.getValue();
+						if (recipient.length() > 0)
+							break;
+					}
+					if (c_item.getName().compareTo("recipient") == 0) {
+						recipient = c_item.getValue();
+						if (login.length() > 0)
+							break;
+					}
+				}
+			}
+			String message = request.getParameter("message");
+			User sender = userDao.findUser(login);
+			User recipientUser = userDao.findUser(recipient);
+			chatMessageDao.addChatMessage(sender.getId(), recipientUser.getId(), message);
 		}
 	}
 }
