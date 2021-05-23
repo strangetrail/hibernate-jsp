@@ -26,6 +26,21 @@ function listchats (user_1, user_2) {
 		},
 		success : function(responseJSON) {
 			var chatArray = responseJSON;
+			var chatbox = document.getElementById('chatbox');
+			chatbox.innerHTML = "";
+			for (i=0; i<chatArray.chats.length; i++) {
+				var element = chatArray.chats[i];
+				var sibling = document.createElement("div");
+				if (element.a === undefined && typeof element.a == 'undefined') {
+					sibling.classList.add('question');
+					sibling.innerHTML = element.q;
+				}
+				else {
+					sibling.classList.add('answer');
+					sibling.innerHTML = element.a;
+				}
+				chatbox.appendChild(sibling);
+			}
 		}
 	});
 }
