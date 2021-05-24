@@ -3,6 +3,7 @@
  */
  
 
+
 function showpage (val) {
 	$.ajax({
 		url : 'gettable',
@@ -73,7 +74,14 @@ var x = document.getElementById("userlist");
 function selectchat(login) {
 	var currentLogin = getCookie("login");
 	listchats(currentLogin, login);
-	
+	document.getElementById("userlist").style.display="none"
+	setInterval(checkNewMessages, 2000)
+}
+
+function checkNewMessages() {
+	var currentlogin = getCookie("login");
+	var recipient = getCookie("recipient");
+	listchats(currentlogin, recipient);
 }
 
 function send_test () {
