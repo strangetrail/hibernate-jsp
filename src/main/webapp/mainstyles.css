@@ -50,11 +50,13 @@ div.loginbar {
 	height:20px;
 	background-color:#c44a0e3d;
 	padding:0px;
+
 }
 .userlist {
 	display: none;
 	position: fixed;
 	width: 10px;
+	z-index: 1;
 }
 .textinput{
 	position:relative;

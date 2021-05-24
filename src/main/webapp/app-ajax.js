@@ -71,11 +71,14 @@ var x = document.getElementById("userlist");
   }
 }
 
+var globalCheckSign = 0;
+
 function selectchat(login) {
 	var currentLogin = getCookie("login");
 	listchats(currentLogin, login);
-	document.getElementById("userlist").style.display="none"
-	setInterval(checkNewMessages, 2000)
+	document.getElementById("userlist").style.display="none";
+	clearInterval(globalCheckSign);
+ 	globalCheckSign = setInterval(checkNewMessages, 2000);
 }
 
 function checkNewMessages() {

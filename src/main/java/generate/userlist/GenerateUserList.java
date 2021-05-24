@@ -5,7 +5,7 @@ import java.util.*;
 
 public class GenerateUserList {
 	public String generateList() {
-		String generatedHTML = "<ul class=\"userlist\" id=\"userlist\">";
+		String generatedHTML = "<ul style=\"z-index: 1\" class=\"userlist\" id=\"userlist\">";
 		UserDAO userDao = new UserDAO();
 		List<User> users = userDao.listUsers();
 		for (User user : users) {
