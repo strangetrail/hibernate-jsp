@@ -75,10 +75,12 @@ var globalCheckSign = 0;
 
 function selectchat(login) {
 	var currentLogin = getCookie("login");
-	listchats(currentLogin, login);
-	document.getElementById("userlist").style.display="none";
-	clearInterval(globalCheckSign);
- 	globalCheckSign = setInterval(checkNewMessages, 2000);
+	if (currentLogin != "") {
+		listchats(currentLogin, login);
+		clearInterval(globalCheckSign);
+	 	globalCheckSign = setInterval(checkNewMessages, 2000);
+ 	}
+ 	document.getElementById("userlist").style.display="none";
 }
 
 function checkNewMessages() {
@@ -88,20 +90,22 @@ function checkNewMessages() {
 }
 
 function send_test () {
-	var message = document.getElementById('chatinput').value;
-	var newcontent = document.createElement('div');
-	newcontent.classList.add('question');
-	newcontent.innerHTML = message;
-	var chatbox = document.getElementById('chatbox');
-	chatbox.appendChild(newcontent);
-	$.ajax({
-		url : 'getchat',
-		data : {
-			action: 'add',
-			message: message
-		},
-		success : function(responseText) {
-			
-		}
-	});
+	if (globalCheckSign != 0) {
+		var message = document.getElementById('chatinput').value;
+		var newcontent = document.createElement('div');
+		newcontent.classList.add('question');
+		newcontent.innerHTML = message;
+		var chatbox = document.getElementById('chatbox');
+		chatbox.appendChild(newcontent);
+		$.ajax({
+			url : 'getchat',
+			data : {
+				action: 'add',
+				message: message
+			},
+			success : function(responseText) {
+				
+			}
+		});
+	}
 }
