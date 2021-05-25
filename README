@@ -65,3 +65,5 @@ CREATE TABLE `users` (    `id` int(3) NOT NULL,    `first_name` varchar(20) DEFA
 KEY (`id`) );
 
 CREATE TABLE `sessions` (    `id` int(3) NOT NULL,    `username` varchar(20) DEFAULT NULL, `sessionid` varchar(256) DEFAULT NULL, `creation_time` DATETIME,    PRIMARY KEY (`id`) );
+
+CREATE TABLE `chats` (    `id` int(3) NOT NULL, `user_1` int(3) DEFAULT NULL, `user_2` DEFAULT NULL, `message` DEFAULT NULL,  PRIMARY KEY (`id`) );
