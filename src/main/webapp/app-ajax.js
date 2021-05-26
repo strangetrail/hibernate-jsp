@@ -17,18 +17,19 @@ function showpage (val) {
 	document.getElementById('listindex').value = val;
 }
 
-function listchats (user_1, user_2) {
+function listchats (user_1, user_2, chat_length) {
 	$.ajax({
 		url : 'getchat',
 		data : {
 			action: "list",
 			user_1: user_1,
-			user_2: user_2
+			user_2: user_2,
+			chat_length: chat_length
 		},
 		success : function(responseJSON) {
 			var chatArray = responseJSON;
 			var chatbox = document.getElementById('chatbox');
-			chatbox.innerHTML = "";
+			//chatbox.innerHTML = "";
 			for (i=0; i<chatArray.chats.length; i++) {
 				var element = chatArray.chats[i];
 				var sibling = document.createElement("div");
@@ -44,6 +45,17 @@ function listchats (user_1, user_2) {
 			}
 		}
 	});
+}
+
+function createCookie(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 *1000));
+        var expires = "; expires=" + date.toGMTString();
+    } else {
+        var expires = "";
+    }
+    document.cookie += ";" + name + "=" + value + expires + "; path=/";
 }
 
 function getCookie(cname) {
@@ -75,8 +87,10 @@ var globalCheckSign = 0;
 
 function selectchat(login) {
 	var currentLogin = getCookie("login");
+	var chatbox = document.getElementById('chatbox');
 	if (currentLogin != "") {
-		listchats(currentLogin, login);
+		chatbox.innerHTML = "";
+		listchats(currentLogin, login, "0");
 		clearInterval(globalCheckSign);
 	 	globalCheckSign = setInterval(checkNewMessages, 2000);
  	}
@@ -86,17 +100,17 @@ function selectchat(login) {
 function checkNewMessages() {
 	var currentlogin = getCookie("login");
 	var recipient = getCookie("recipient");
-	listchats(currentlogin, recipient);
+	listchats(currentlogin, recipient, getCookie("chat_length"));
 }
 
 function send_test () {
 	if (globalCheckSign != 0) {
 		var message = document.getElementById('chatinput').value;
-		var newcontent = document.createElement('div');
+		/*var newcontent = document.createElement('div');
 		newcontent.classList.add('question');
 		newcontent.innerHTML = message;
 		var chatbox = document.getElementById('chatbox');
-		chatbox.appendChild(newcontent);
+		chatbox.appendChild(newcontent);*/
 		$.ajax({
 			url : 'getchat',
 			data : {

@@ -72,10 +72,14 @@ div.loginbar {
     position: relative;
     right:10px;
     text-align: right;
+    margin: 5px;
+    padding-buttom: 5px;
 }
 .question {
     background-color: #c44a0e3d;
     left: 10px;
     position: relative;
     width: 270px;
+    margin: 5px;
+    padding-buttom: 5px;
 }

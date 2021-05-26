@@ -30,19 +30,40 @@ public class ChatServlet extends HttpServlet {
 			String user_2 = request.getParameter("user_2").trim();
 			Integer user1 = userDao.findUser(user_1).getId();
 			Integer user2 = userDao.findUser(user_2).getId();
+			Integer startPosition = 0;
+			Cookie []c = request.getCookies();
+			ChatMessage message;
+			if (c != null) {
+				for (Cookie cItem : c) {
+					if (cItem.getName().compareTo("chat_length") == 0) {
+						startPosition = Integer.parseInt(cItem.getValue());
+						break;
+					}
+				}
+			}
+			if (Integer.parseInt(request.getParameter("chat_length")) < startPosition) {
+				startPosition = Integer.parseInt(request.getParameter("chat_length"));
+				
+			}
 			List<ChatMessage> messages = chatMessageDao.listChatMessages(user1, user2);
-			for (ChatMessage message : messages) {
+			for (int i=startPosition; i<messages.size(); i++) {
+				message = messages.get(i);
 				if (message.getUser1() == user1) {
 					JSONChat += "{\"q\":\"" + message.getMessage() + "\"},";
 				} else {
 					JSONChat += "{\"a\":\"" + message.getMessage() + "\"},";
 				}
 			}
-			JSONChat = JSONChat.substring(0, JSONChat.length() - 1);
+			if (JSONChat.length()>10) {
+				JSONChat = JSONChat.substring(0, JSONChat.length() - 1);
+			}
 			JSONChat += "]}";
 			Cookie cookieRecipient = new Cookie("recipient", user_2);
 		    cookieRecipient.setMaxAge(60*60);
 		    response.addCookie(cookieRecipient);
+			Cookie cookieChatLength = new Cookie("chat_length", "" + messages.size());
+		    cookieChatLength.setMaxAge(60*60);
+		    response.addCookie(cookieChatLength);
 			response.setContentType("text/json");
 			response.getWriter().write(JSONChat);
 		}
@@ -67,6 +88,9 @@ public class ChatServlet extends HttpServlet {
 			User sender = userDao.findUser(login);
 			User recipientUser = userDao.findUser(recipient);
 			chatMessageDao.addChatMessage(sender.getId(), recipientUser.getId(), message);
+		}
+		if (request.getParameter("action").compareTo("refresh") == 0) {
+			
 		}
 	}
 }
