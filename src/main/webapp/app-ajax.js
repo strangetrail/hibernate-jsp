@@ -103,6 +103,24 @@ function checkNewMessages() {
 	listchats(currentlogin, recipient, getCookie("chat_length"));
 }
 
+function clean_all() {
+	var currentlogin = getCookie("login");
+	var recipient = getCookie("recipient");
+	var chatbox = document.getElementById('chatbox');
+	chatbox.innerHTML = "";
+		$.ajax({
+			url : 'getchat',
+			data : {
+				action: 'clean',
+				user_1: currentlogin,
+				user_2: recipient
+			},
+			success : function(responseText) {
+				
+			}
+		});
+}
+
 function send_test () {
 	if (globalCheckSign != 0) {
 		var message = document.getElementById('chatinput').value;

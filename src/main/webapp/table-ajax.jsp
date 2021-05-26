@@ -44,6 +44,7 @@
 	</div>
 	<input type="text" class="textinput" id="chatinput"/>
 	<input type="button" class="submitchatbutton" value="send" onclick="send_test()"/>
+	<input type="button" class="submitchatbutton" value="clean all" onclick="clean_all()">
 	</div>
 </body>
 </html>

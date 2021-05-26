@@ -89,8 +89,16 @@ public class ChatServlet extends HttpServlet {
 			User recipientUser = userDao.findUser(recipient);
 			chatMessageDao.addChatMessage(sender.getId(), recipientUser.getId(), message);
 		}
-		if (request.getParameter("action").compareTo("refresh") == 0) {
-			
+		if (request.getParameter("action").compareTo("clean") == 0) {
+			String user_1 = request.getParameter("user_1").trim();		
+			String user_2 = request.getParameter("user_2").trim();
+			Integer user1 = userDao.findUser(user_1).getId();
+			Integer user2 = userDao.findUser(user_2).getId();
+			chatMessageDao.removeChatMessages(user1, user2);
+			Cookie cookieChatLength = new Cookie("chat_length", "0");
+		    cookieChatLength.setMaxAge(60*60);
+		    response.addCookie(cookieChatLength);
+
 		}
 	}
 }
