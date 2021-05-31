@@ -100,5 +100,15 @@ public class ChatServlet extends HttpServlet {
 		    response.addCookie(cookieChatLength);
 
 		}
+		if (request.getParameter("action").compareTo("delete") == 0) {
+			String sender = request.getParameter("user_1").trim();		
+			String recipient = request.getParameter("user_2").trim();
+			Integer senderId = userDao.findUser(sender).getId();
+			Integer recipientId = userDao.findUser(recipient).getId();
+			chatMessageDao.deleteChatMessages(senderId, recipientId);
+			Cookie cookieChatLength = new Cookie("chat_length", "0");
+		    cookieChatLength.setMaxAge(60*60);
+		    response.addCookie(cookieChatLength);
+		}
 	}
 }

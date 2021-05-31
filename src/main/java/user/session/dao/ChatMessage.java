@@ -27,6 +27,12 @@ public class ChatMessage implements Serializable {
 	@Column(name = "message")
 	private String message;
 	
+	@Column(name = "deleted_for_sender")
+	private Boolean deletedForSender;
+	
+	@Column(name = "deleted_for_recipient")
+	private Boolean deletedForRecipient;
+	
 	public int getId() {
 		return this.id;
 	}
@@ -57,5 +63,21 @@ public class ChatMessage implements Serializable {
 	
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	public Boolean getDeletedForSender() {
+		return this.deletedForSender;
+	}
+	
+	public void setDeletedForSender(Boolean deletedForSender) {
+		this.deletedForSender = deletedForSender;
+	}
+	
+	public Boolean getDeletedForRecipient() {
+		return this.deletedForRecipient;
+	}
+	
+	public void setDeletedForRecipient(Boolean deletedForRecipient) {
+		this.deletedForRecipient = deletedForRecipient;
 	}
 }

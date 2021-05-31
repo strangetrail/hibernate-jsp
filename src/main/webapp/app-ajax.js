@@ -111,7 +111,7 @@ function clean_all() {
 		$.ajax({
 			url : 'getchat',
 			data : {
-				action: 'clean',
+				action: 'delete',
 				user_1: currentlogin,
 				user_2: recipient
 			},
