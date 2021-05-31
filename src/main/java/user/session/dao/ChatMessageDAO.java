@@ -43,6 +43,7 @@ public class ChatMessageDAO {
 		Transaction tr = null;
 		try(Session session = HibernateModel.getSessionFactory().openSession()) {
         	tr = session.beginTransaction();
+        	boolean messageDeleted;
         	CriteriaBuilder cb_messages = session.getCriteriaBuilder();
     		CriteriaQuery<ChatMessage> cquery = cb_messages.createQuery(ChatMessage.class);
     		Root<ChatMessage> root = cquery.from(ChatMessage.class);
@@ -59,7 +60,17 @@ public class ChatMessageDAO {
     				message.setDeletedForSender(true);
     			else
     				message.setDeletedForRecipient(true);
-        		session.save(message);
+    			messageDeleted = false;
+    			if ((message.getDeletedForSender() != null)
+    					&&(message.getDeletedForRecipient() != null)) {
+    				if (message.getDeletedForSender()
+    					&& message.getDeletedForRecipient()) {
+    					session.delete(message);
+    					messageDeleted = true;
+    				}
+    			}
+    			if (!messageDeleted)
+    				session.save(message);
     		}
         	tr.commit();
 		} catch (Exception e) {
