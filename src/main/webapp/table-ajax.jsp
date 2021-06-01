@@ -42,7 +42,7 @@
 	<div id="chatbox" class="chatbox">
 				
 	</div>
-	<input type="text" class="textinput" id="chatinput"/>
+	<textarea rows=5 columns=50 class="textinput" id="chatinput"></textarea>
 	<input type="button" class="submitchatbutton" value="send" onclick="send_test()"/>
 	<input type="button" class="submitchatbutton" value="clean all" onclick="clean_all()">
 	</div>
